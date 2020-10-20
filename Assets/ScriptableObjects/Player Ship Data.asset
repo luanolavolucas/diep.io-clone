@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f9306fa773748448f9c39d5b8781fe, type: 3}
   m_Name: Player Ship Data
   m_EditorClassIdentifier: 
+  health: 5
+  speed: 5

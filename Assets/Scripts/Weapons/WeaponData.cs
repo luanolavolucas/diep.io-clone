@@ -7,5 +7,6 @@ public class WeaponData : ScriptableObject
 {
     public int startingAmmo;
     public int ammoSpentPerShot;
+    public float firingSpeed;
     public GameObject bulletPrefab;
 }
