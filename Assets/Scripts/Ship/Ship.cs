@@ -32,6 +32,12 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable
     public void Damage(float dmg)
     {
         print("SHIP DAMAGED!");
+        Health -= dmg;
+
+        if (Health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void Fire()
