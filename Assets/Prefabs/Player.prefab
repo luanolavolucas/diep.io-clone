@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5061983877518795999}
   - component: {fileID: 5836665177241260096}
   - component: {fileID: 5836665177241260090}
-  - component: {fileID: 3098215862534964801}
   - component: {fileID: 6018868735606141378}
   - component: {fileID: 2566403246338454377}
   m_Layer: 8
@@ -113,18 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 5836665177241260096}
---- !u!114 &3098215862534964801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5216372665918371051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33ae17a12be7a5e42961ece1615829d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &6018868735606141378
 CircleCollider2D:
   m_ObjectHideFlags: 0

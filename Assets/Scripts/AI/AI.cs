@@ -6,19 +6,24 @@ using UnityEngine;
 public class AI : MonoBehaviour
 {
     Ship ship;
-    public float detectionRadius = 10.0f;
+    public float detectionRadius = 12.0f;
+    public float shootingRadius = 8.0f;
+    public float avoidRadius = 4.0f;
+    public  List<Ship> detectedAllies;
+    public List<Ship> detectedEnemies;
+    [SerializeField]
     AIState currentState;
-    // Start is called before the first frame update
     void Start()
     {
         ship = GetComponent<Ship>();
-        currentState = new AIState_Idle(ship, this); // Create our first state.
+        detectedAllies = new List<Ship>();
+        detectedEnemies = new List<Ship>();
+        currentState = new AIState_Idle(ship, this);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        currentState = currentState.Process(); // Calls Process method to ensure correct state is set.
+        currentState = currentState.Process(); 
     }
     private void OnDrawGizmos()
     {

@@ -24,6 +24,12 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable
         
     }
 
+    public void MoveTowards(Vector3 target)
+    {
+        Vector3 direction = Vector3.Normalize(target - transform.position);
+        Move(direction.x, direction.y);
+    }
+
     public void Move(float directionX, float directionY)
     {
         rb.velocity = new Vector2(directionX,directionY) * shipData.speed;
@@ -38,6 +44,13 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void Aim(Vector3 target)
+    {
+        Vector3 difference = target - transform.position;
+        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
     }
 
     public void Fire()

@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bea13423116831469c2bb87548eb86d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipData: {fileID: 11400000, guid: 2e71bcb6a06749a44bf30e0736d55e97, type: 2}
+  shipData: {fileID: 11400000, guid: 8c4f8a696cbc97b47bc624ff14ef706d, type: 2}
 --- !u!114 &5240419422354658140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +156,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356ba0f3211eca8449461118db3cc8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 12
+  shootingRadius: 8
+  avoidRadius: 4
+  detectedAllies: []
+  detectedEnemies: []
+  currentState:
+    name: 0
 --- !u!58 &7629346664287214933
 CircleCollider2D:
   m_ObjectHideFlags: 0

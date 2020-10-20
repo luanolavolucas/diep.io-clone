@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class AIState
 {
     public enum State
@@ -18,10 +20,7 @@ public class AIState
     protected Phase phase;
     protected Ship ship;
     protected AI ai;
-    protected Transform target;// put this inside the aggressive states
     protected AIState nextState;
-
-    float visDist = 10.0f;
 
     public AIState(Ship ship, AI ai)
     {
@@ -44,5 +43,30 @@ public class AIState
             return nextState; // Notice that this method returns a 'state'.
         }
         return this; // If we're not returning the nextState, then return the same state.
+    }
+
+    protected void DetectShips()
+    {
+        //TODO: Optmize this check
+        Collider2D[] cols = Physics2D.OverlapCircleAll(ship.transform.position, ai.detectionRadius, LayerMask.GetMask("Ships"));
+        foreach (Collider2D col in cols)
+        {
+            Ship s = col.gameObject.GetComponent<Ship>();
+            //TODO:
+            if (s!= null)
+            {
+                if(s.shipData.team != ship.shipData.team)
+                {
+                    if(!ai.detectedEnemies.Contains(s))
+                        ai.detectedEnemies.Add(s);
+                }
+                else
+                {
+                    if (!ai.detectedAllies.Contains(s))
+                        ai.detectedAllies.Add(s);
+                }
+                
+            }
+        }
     }
 }

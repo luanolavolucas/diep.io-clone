@@ -15,6 +15,8 @@ public class Player : ShipController
         {
             ship.Fire();
         }
+        Vector3 target = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+        ship.Aim(target);
     }
 
     void FixedUpdate()

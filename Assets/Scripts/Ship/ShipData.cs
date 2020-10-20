@@ -8,6 +8,7 @@ public class ShipData : ScriptableObject
 {
     public float health;
     public float speed;
+    public Team team;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,3 +21,4 @@ public class ShipData : ScriptableObject
         
     }
 }
+public enum Team { Red,Blue}
