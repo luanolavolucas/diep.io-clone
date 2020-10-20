@@ -4,5 +4,6 @@ using UnityEngine;
 
 interface IWeaponEquippable
 {
-     WeaponSlot WeaponSlot{get; set;}
+    WeaponSlot WeaponSlot{get; set;}
+    void Fire();
 }

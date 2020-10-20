@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2063d224c8867245acbb02b0efdeb29, type: 3}
-  m_Name: Bullet Data - Default
+  m_Script: {fileID: 11500000, guid: d5a718cff89d80c45bcf4e271c5c3423, type: 3}
+  m_Name: Crate Data
   m_EditorClassIdentifier: 
-  speed: 6
-  damage: 1
+  health: 3

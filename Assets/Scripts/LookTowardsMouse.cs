@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LookTowardsMouse : MonoBehaviour
 {
-    public GameObject pivot;
     // Start is called before the first frame update
     void Start()
     {
