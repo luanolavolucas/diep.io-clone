@@ -17,7 +17,10 @@ public class AIState_Attack : AIState
     {
         target = ai.detectedEnemies[0];
         Debug.Log("Attacking.");
+        ship.Brake(3);
         base.Enter();
+
+
     }
     public override void Update()
     {

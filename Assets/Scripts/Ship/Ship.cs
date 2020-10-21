@@ -2,26 +2,43 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using DG.Tweening;
 
-public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable
+[RequireComponent(typeof(Rigidbody2D))]
+public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable, IScoreCollector
 {
-    public ShipData shipData;
-    public float Health {get; protected set;}
+    [SerializeField]
+    float health;
+    public float Health {
+        get { return health; }
+        protected set {
+           health = value;
+        }
+    }
+    [field: SerializeField]
+    public float Score { get; protected set; }
+
     public WeaponSlot WeaponSlot { get; set; }
 
-    private Rigidbody2D rb;
-    // Start is called before the first frame update
+    public ShipData shipData;
+    public Team team;
+
+    Rigidbody2D rb;
+    SpriteRenderer sr;
+    Tween brake;
+
     void Start()
     {
         Health = shipData.health;
         WeaponSlot = GetComponentInChildren<WeaponSlot>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        sr.color = team.teamColor;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDestroy()
     {
-        
+        brake.Kill();
     }
 
     public void MoveTowards(Vector3 target)
@@ -35,13 +52,19 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable
         rb.velocity = new Vector2(directionX,directionY) * shipData.speed;
     }
 
-    public void Damage(float dmg)
+    public void Brake(float time)
     {
-        print("SHIP DAMAGED!");
+        brake = DOTween.To(() => rb.velocity, x => rb.velocity = x, new Vector2(0, 0), time);
+    }
+
+    public void Damage(float dmg, IScoreCollector responsible = null)
+    {
         Health -= dmg;
 
         if (Health <= 0)
         {
+            if (responsible != null)
+                responsible.AddToScore(shipData.scoreAwardedWhenDestroyed);
             Destroy(this.gameObject);
         }
     }
@@ -56,5 +79,14 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable
     public void Fire()
     {
         WeaponSlot.Weapon.Fire();
+    }
+    public void AddToScore(float value)
+    {
+        Score += value;
+    }
+
+    public void ResetScore()
+    {
+        Score = 0.0f;
     }
 }

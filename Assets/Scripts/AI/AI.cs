@@ -25,7 +25,7 @@ public class AI : MonoBehaviour
     {
         currentState = currentState.Process(); 
     }
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);

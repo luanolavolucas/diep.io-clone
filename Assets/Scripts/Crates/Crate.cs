@@ -4,26 +4,30 @@ using UnityEngine;
 
 public class Crate : MonoBehaviour, IDamageable
 {
-    //public GameObject weaponToSpawn;
-    public CrateData crateData;
     public float Health { get; protected set; }
+
+    public GameObject powerUpPrefab;
+    public CrateData crateData;
+
     // Start is called before the first frame update
     void Start()
     {
         Health = crateData.health;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void OnDestroy()
     {
-        
+        Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
     }
 
-    public void Damage(float dmg)
+
+    public void Damage(float dmg, IScoreCollector responsible = null)
     {
         Health-= dmg;
         if(Health <= 0)
         {
+            if (responsible != null)
+                responsible.AddToScore(crateData.scoreAwardedWhenDestroyed);
             Destroy(this.gameObject);
         }
     }

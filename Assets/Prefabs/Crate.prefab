@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242e47d7cc682f640a39f16a1fbe8e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpPrefab: {fileID: 1451996844203599560, guid: 4b12e28b3c801034bbece0c2c4547fe8,
+    type: 3}
   crateData: {fileID: 11400000, guid: 0dfacfaf7e68324429182f8c3abe7345, type: 2}
 --- !u!50 &1750874726266694423
 Rigidbody2D:

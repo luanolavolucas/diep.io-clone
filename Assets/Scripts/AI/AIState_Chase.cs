@@ -14,7 +14,6 @@ public class AIState_Chase : AIState
     public override void Enter()
     {
         target = ai.detectedEnemies[0];
-        Debug.Log("Chasing.");
         base.Enter();
     }
     public override void Update()

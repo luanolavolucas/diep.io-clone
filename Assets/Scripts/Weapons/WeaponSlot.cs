@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class WeaponSlot : MonoBehaviour
 {
-    public GameObject weaponPrefab;
     public Weapon Weapon { get; private set; }
 
-    private void Start()
+    public Ship owner;
+    public GameObject defaultWeapon;
+
+    void Start()
     {
-        EquipWeapon(weaponPrefab);
+        EquipWeapon(defaultWeapon);
     }
+
     public void EquipWeapon(GameObject weaponPrefab)
     {
         if(weaponPrefab != null)
@@ -19,11 +22,13 @@ public class WeaponSlot : MonoBehaviour
             if(Weapon == null)
             {
                 Weapon = Instantiate(weaponPrefab, transform).GetComponent<Weapon>();
+                Weapon.Owner = owner;
             }
             else
             {
-                Destroy(Weapon);
+                Destroy(Weapon.gameObject);
                 Weapon = Instantiate(weaponPrefab, transform).GetComponent<Weapon>();
+                Weapon.Owner = owner;
             }
                 
         }

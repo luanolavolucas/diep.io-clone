@@ -6,4 +6,5 @@ using UnityEngine;
 public class CrateData : ScriptableObject
 {
     public float health;
+    public int scoreAwardedWhenDestroyed = 10;
 }

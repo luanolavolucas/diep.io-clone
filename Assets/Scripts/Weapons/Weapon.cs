@@ -2,37 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
-    public float Ammo { get; protected set; }
+    [field: SerializeField]
+    public int Ammo { get;  set; }
+    public Ship Owner { get; set; }
 
     [Header("Set in Inspector")]
     public BulletExitPoint[] bulletExitPoints;
     public WeaponData weaponData;
-    public GameObject bulletPool;
 
-    // Start is called before the first frame update
+    //TODO: Use bullet pool:
+    protected List<Bullet> bulletPool;
+
     void Start()
     {
         bulletExitPoints = GetComponentsInChildren<BulletExitPoint>();
         Ammo = weaponData.startingAmmo;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public virtual void Fire()
-    {
+    {        
         foreach(BulletExitPoint bep in bulletExitPoints)
         {
-           GameObject bullet = Instantiate(weaponData.bulletPrefab, bep.transform.position, bep.transform.rotation);
-            //TODO:  Create bullet pool and bullet pool object
-            //bullet.transform.parent = bulletPool.transform;
-            Ammo--;
+            if (Ammo<=0)
+            {
+                //TODO: Find a better place for this logic, probably inside Ship instead.
+                Owner.WeaponSlot.EquipWeapon(Owner.WeaponSlot.defaultWeapon);
+                return;
+            }
+            GameObject bullet = Instantiate(weaponData.bulletPrefab, bep.transform.position, bep.transform.rotation);
+            
+            bullet.GetComponent<Bullet>().weapon = this;
+            Ammo -= weaponData.ammoSpentPerShot;
         }
-
     }
 }

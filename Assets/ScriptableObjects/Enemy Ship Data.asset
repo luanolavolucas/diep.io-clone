@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Enemy Ship Data
   m_EditorClassIdentifier: 
   health: 3
-  speed: 5
+  speed: 4
+  team: 0

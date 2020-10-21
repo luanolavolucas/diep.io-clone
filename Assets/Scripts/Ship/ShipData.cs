@@ -8,17 +8,5 @@ public class ShipData : ScriptableObject
 {
     public float health;
     public float speed;
-    public Team team;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int scoreAwardedWhenDestroyed = 20;
 }
-public enum Team { Red,Blue}

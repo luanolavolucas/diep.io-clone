@@ -55,7 +55,7 @@ public class AIState
             //TODO:
             if (s!= null)
             {
-                if(s.shipData.team != ship.shipData.team)
+                if(s.team != ship.team)
                 {
                     if(!ai.detectedEnemies.Contains(s))
                         ai.detectedEnemies.Add(s);

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface IDamageable
+public interface IDamageable
 {
     float Health { get;}
-    void Damage(float dmg);
+    void Damage(float dmg, IScoreCollector responsible = null);
 }
