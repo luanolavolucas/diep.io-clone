@@ -11,7 +11,6 @@ public abstract class Weapon : MonoBehaviour
     [Header("Set in Inspector")]
     public WeaponData weaponData;
 
-    //TODO: Use bullet pool:
     protected ObjectPool bulletPool;
     protected BulletExitPoint[] bulletExitPoints;
 
@@ -19,14 +18,16 @@ public abstract class Weapon : MonoBehaviour
     {
         bulletExitPoints = GetComponentsInChildren<BulletExitPoint>();
         Ammo = weaponData.startingAmmo;
-        bulletPool = new ObjectPool(weaponData.bulletPrefab, 20);
+        GameObject bulletPoolGO = new GameObject();
+        bulletPool = bulletPoolGO.AddComponent<ObjectPool>();
+        bulletPool.Init(weaponData.bulletPrefab, 20);
     }
 
-    void Start()
+    void OnDestroy()
     {
-
-
+        bulletPool.SetDestructionFlag(true);
     }
+
 
     public virtual void Fire()
     {        

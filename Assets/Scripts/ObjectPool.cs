@@ -3,19 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public class ObjectPool 
+public class ObjectPool:MonoBehaviour
 {
     private GameObject prefab;
-    private GameObject poolGO;
     private List<GameObject> pool;
+    private  bool canBeDestroyed;
 
-    public ObjectPool(GameObject prefab, int poolSize)
+    public void Init(GameObject prefab, int poolSize)
     {
         this.prefab = prefab;
         pool = new List<GameObject>(poolSize);
 
-        poolGO = new GameObject(prefab.name + " Pool");
-        poolGO.transform.parent = GameManager.Instance.bulletPools.transform;
+        gameObject.name = prefab.name + " Pool";
+        transform.parent = GameManager.Instance.bulletPools.transform;
 
         for (int i = 0; i < poolSize; i++)
         {
@@ -25,11 +25,23 @@ public class ObjectPool
 
     private GameObject NewPooledObject()
     {
-        GameObject instance = GameObject.Instantiate(prefab, poolGO.transform.position, Quaternion.identity);
-        instance.transform.parent = poolGO.transform;
+        GameObject instance = GameObject.Instantiate(prefab, transform.position, Quaternion.identity);
+        instance.transform.parent = transform;
         pool.Add(instance);
         instance.SetActive(false);
         return instance;
+    }
+
+    internal void SetDestructionFlag(bool v)
+    {
+        canBeDestroyed = true;
+    }
+
+    private void Update()
+    {
+        //If all objects are inactive and the flag has been set, destroy the pool.
+        if (pool.All(go => !go.activeInHierarchy) && canBeDestroyed)
+            Destroy(gameObject);
     }
 
     public GameObject Instantiate(Vector3 position, Quaternion rotation)
