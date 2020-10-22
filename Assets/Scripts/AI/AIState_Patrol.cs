@@ -50,7 +50,7 @@ public class AIState_Patrol : AIState
     void SetPatrolTarget()
     {
         Debug.Log("Finding a new patrol target.");
-        patrolTarget = new Vector2(Random.Range(-20, 20), Random.Range(-20, 20));
+        patrolTarget = new Vector2(Random.Range(-30, 30), Random.Range(-30, 30));
     }
 
     bool ArrivedAtPatrolTarget()

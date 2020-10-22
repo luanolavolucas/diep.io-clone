@@ -8,7 +8,10 @@ public class ShipSpawnPoint : MonoBehaviour
     {
         get
         {
+            //TODO: Add some checks to this.
             return true;
         }
     }
+
+    public bool playerSpawnPoint;
 }

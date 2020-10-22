@@ -18,6 +18,13 @@ public class AIState_Chase : AIState
     }
     public override void Update()
     {
+        if (target == null)
+        {
+            nextState = new AIState_Idle(ship, ai);
+            phase = Phase.EXIT;
+            return;
+        }
+
         ship.Aim(target.transform.position);
         if(Vector3.Distance(target.transform.position,ship.transform.position) > ai.shootingRadius)
         {

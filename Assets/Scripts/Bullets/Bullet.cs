@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    const float maxLifetime = 5;
     public BulletData bulletData;
 
     [HideInInspector]
     public Weapon weapon;
     
     Rigidbody2D rb;
-
-    void Start()
+    float startTime = 0;
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void OnEnable()
+    {
+        startTime = Time.time;
     }
 
     void FixedUpdate()
     {
         Move();
+
+        if (Time.time - startTime > maxLifetime)
+            gameObject.SetActive(false);
     }
 
     void Move()
@@ -33,17 +42,7 @@ public class Bullet : MonoBehaviour
         if (damageable != null)
         {
             damageable.Damage(bulletData.damage, weapon.Owner);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
-
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-    //    if (damageable != null)
-    //    {
-    //        damageable.Damage(bulletData.damage);
-    //    }
-    //}
-
 }

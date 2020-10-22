@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -23,22 +24,19 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable, IScoreCollect
     public ShipData shipData;
     public Team team;
 
+    public Action<Ship> onShipKill;
+
     Rigidbody2D rb;
     SpriteRenderer sr;
     Tween brake;
 
-    void Start()
+    void Awake()
     {
         Health = shipData.health;
         WeaponSlot = GetComponentInChildren<WeaponSlot>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         sr.color = team.teamColor;
-    }
-
-    void OnDestroy()
-    {
-        brake.Kill();
     }
 
     public void MoveTowards(Vector3 target)
@@ -65,6 +63,9 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable, IScoreCollect
         {
             if (responsible != null)
                 responsible.AddToScore(shipData.scoreAwardedWhenDestroyed);
+            brake.Kill();
+            onShipKill?.Invoke(this);
+
             Destroy(this.gameObject);
         }
     }

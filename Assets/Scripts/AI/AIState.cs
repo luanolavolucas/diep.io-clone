@@ -52,13 +52,15 @@ public class AIState
         foreach (Collider2D col in cols)
         {
             Ship s = col.gameObject.GetComponent<Ship>();
-            //TODO:
             if (s!= null)
             {
                 if(s.team != ship.team)
                 {
                     if(!ai.detectedEnemies.Contains(s))
+                    {
                         ai.detectedEnemies.Add(s);
+                        s.onShipKill += RemoveEnemyFromList;
+                    }
                 }
                 else
                 {
@@ -68,5 +70,11 @@ public class AIState
                 
             }
         }
+    }
+
+    private void RemoveEnemyFromList(Ship s)
+    {
+        ai.detectedEnemies.Remove(s);
+        s.onShipKill -= RemoveEnemyFromList;
     }
 }

@@ -15,11 +15,6 @@ public class Crate : MonoBehaviour, IDamageable
         Health = crateData.health;
     }
 
-    void OnDestroy()
-    {
-        Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
-    }
-
 
     public void Damage(float dmg, IScoreCollector responsible = null)
     {
@@ -28,6 +23,7 @@ public class Crate : MonoBehaviour, IDamageable
         {
             if (responsible != null)
                 responsible.AddToScore(crateData.scoreAwardedWhenDestroyed);
+            Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

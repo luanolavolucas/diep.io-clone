@@ -24,6 +24,14 @@ public class AIState_Attack : AIState
     }
     public override void Update()
     {
+        if(target == null)
+        {
+            nextState = new AIState_Idle(ship, ai);
+            phase = Phase.EXIT;
+            return;
+        }
+
+
         ship.Aim(target.transform.position);
         if (Time.time - lastFired > firingInterval)
         {

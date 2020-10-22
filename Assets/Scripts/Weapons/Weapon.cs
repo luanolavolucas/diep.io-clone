@@ -9,16 +9,23 @@ public abstract class Weapon : MonoBehaviour
     public Ship Owner { get; set; }
 
     [Header("Set in Inspector")]
-    public BulletExitPoint[] bulletExitPoints;
     public WeaponData weaponData;
 
     //TODO: Use bullet pool:
-    protected List<Bullet> bulletPool;
+    protected ObjectPool bulletPool;
+    protected BulletExitPoint[] bulletExitPoints;
 
-    void Start()
+    void Awake()
     {
         bulletExitPoints = GetComponentsInChildren<BulletExitPoint>();
         Ammo = weaponData.startingAmmo;
+        bulletPool = new ObjectPool(weaponData.bulletPrefab, 20);
+    }
+
+    void Start()
+    {
+
+
     }
 
     public virtual void Fire()
@@ -31,7 +38,7 @@ public abstract class Weapon : MonoBehaviour
                 Owner.WeaponSlot.EquipWeapon(Owner.WeaponSlot.defaultWeapon);
                 return;
             }
-            GameObject bullet = Instantiate(weaponData.bulletPrefab, bep.transform.position, bep.transform.rotation);
+            GameObject bullet = bulletPool.Instantiate(bep.transform.position, bep.transform.rotation);
             
             bullet.GetComponent<Bullet>().weapon = this;
             Ammo -= weaponData.ammoSpentPerShot;

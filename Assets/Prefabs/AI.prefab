@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 7739351749370002647}
-  weaponPrefab: {fileID: 7806751024907736947, guid: 30b81446fee66484aba9674bc017abd0,
+  defaultWeapon: {fileID: 7806751024907736947, guid: 30b81446fee66484aba9674bc017abd0,
     type: 3}
 --- !u!1 &8215678606995331196
 GameObject:
