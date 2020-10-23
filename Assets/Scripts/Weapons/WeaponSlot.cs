@@ -9,7 +9,7 @@ public class WeaponSlot : MonoBehaviour
     public Ship owner;
     public GameObject defaultWeapon;
 
-    void Start()
+    void Awake()
     {
         EquipWeapon(defaultWeapon);
     }

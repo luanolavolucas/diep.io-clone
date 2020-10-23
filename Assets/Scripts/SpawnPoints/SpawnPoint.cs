@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipSpawnPoint : MonoBehaviour
+public class SpawnPoint : MonoBehaviour
 {
     public bool CanSpawn
     {
@@ -12,6 +12,4 @@ public class ShipSpawnPoint : MonoBehaviour
             return true;
         }
     }
-
-    public bool playerSpawnPoint;
 }

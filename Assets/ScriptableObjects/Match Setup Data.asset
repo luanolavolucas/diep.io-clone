@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba2c711aee8c58b4886a73d6ee19f2d0, type: 3}
-  m_Name: New Match Setup Data
+  m_Name: Match Setup Data
   m_EditorClassIdentifier: 
-  maxShips: 10
-  timeBetweenSpawns: 0
+  maxShips: 12
+  maxPowerUps: 5
+  timeBetweenAISpawns: 3
+  timeBetweenCrateSpawns: 5

@@ -7,7 +7,7 @@ public class WeaponPowerup : PowerUp
     public GameObject weaponPrefab;
     Weapon weapon;
 
-    void Start()
+    void Awake()
     {
         weapon = weaponPrefab.GetComponent<Weapon>();
     }

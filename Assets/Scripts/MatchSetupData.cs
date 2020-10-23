@@ -6,6 +6,8 @@ using UnityEngine;
 public class MatchSetupData : ScriptableObject
 {
     public int maxShips = 10;
-    public float timeBetweenSpawns;
+    public int maxPowerUps = 5;
+    public float timeBetweenAISpawns;
+    public float timeBetweenCrateSpawns;
 
 }

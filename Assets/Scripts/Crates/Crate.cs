@@ -1,20 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Crate : MonoBehaviour, IDamageable
 {
     public float Health { get; protected set; }
 
     public GameObject powerUpPrefab;
     public CrateData crateData;
-
-    // Start is called before the first frame update
-    void Start()
+    public Action<Crate> onCrateKill;
+    void Awake()
     {
         Health = crateData.health;
     }
-
 
     public void Damage(float dmg, IScoreCollector responsible = null)
     {
@@ -24,6 +22,7 @@ public class Crate : MonoBehaviour, IDamageable
             if (responsible != null)
                 responsible.AddToScore(crateData.scoreAwardedWhenDestroyed);
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+            onCrateKill?.Invoke(this);
             Destroy(this.gameObject);
         }
     }

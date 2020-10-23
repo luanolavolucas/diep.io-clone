@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,20 +14,20 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+    public ShipSpawnPoint[] ShipSpawnPoints { get; private set; }
+
     [Header("Set in Inspector")]
     public MatchSetupData matchSetupData;
     public GameObject playerPrefab;
     public UIController ui;
     public GameObject aiPrefab;
     public GameObject bulletPools;
+
+    //Not used yet:
     public Action onGameStart;
     public Action onGameEnd;
 
     Player playerInstance;
-    ShipSpawnPoint[] shipSpawnPoints;
-    [SerializeField]
-    List<Ship> ais;
-    float aiSpawnTimer = 0;
 
     void Awake()
     {
@@ -39,8 +40,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
-        shipSpawnPoints = FindObjectsOfType<ShipSpawnPoint>();
-        ais = new List<Ship>();
+        ShipSpawnPoints = FindObjectsOfType<ShipSpawnPoint>();
     }
     void Start()
     {
@@ -50,35 +50,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         UpdateUI();
-        UpdateSpawns();
-    }
 
-    void UpdateSpawns()
-    {
-        aiSpawnTimer += Time.deltaTime;
-        if(aiSpawnTimer > matchSetupData.timeBetweenSpawns
-            && ais.Count <matchSetupData.maxShips)
-        {
-            int randomSpawnPoint = UnityEngine.Random.Range(0, shipSpawnPoints.Length);
-            SpawnAI(shipSpawnPoints[randomSpawnPoint]);
-        }
-
-        void SpawnAI(ShipSpawnPoint ssp)
-        {
-            if (ssp.playerSpawnPoint)
-                return;
-            GameObject ai = Instantiate(aiPrefab, ssp.transform.position, Quaternion.identity);
-            Ship s = ai.GetComponent<Ship>();
-            s.onShipKill += RemoveShip;
-            aiSpawnTimer = 0;
-            ais.Add(s);
-        }
-
-        void RemoveShip(Ship s)
-        {
-            s.onShipKill -= RemoveShip;
-            ais.Remove(s);
-        }
+        //Quick "quit game" hack, just making test easier.
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(0);
     }
 
     void UpdateUI()
@@ -122,7 +97,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        foreach (ShipSpawnPoint ssp in shipSpawnPoints)
+        foreach (ShipSpawnPoint ssp in ShipSpawnPoints)
         {
             if (ssp.CanSpawn && ssp.playerSpawnPoint)
             {
@@ -130,5 +105,16 @@ public class GameManager : MonoBehaviour
                 playerInstance.transform.position = ssp.transform.position;
             }
         }
+        playerInstance.ship.onShipKill += GameOver;
+    }
+
+    void GameOver(Ship s)
+    {
+        ui.ShowGameOver(s.Score.ToString());
+    }
+
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
