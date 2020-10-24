@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76687e7a04fc92a499a3256d7b1f7f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDespawners: []
+  boxCollider: {fileID: 208512485}
 --- !u!1 &248029655
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 285297112}
   - component: {fileID: 285297113}
   m_Layer: 0
-  m_Name: BulletDespawners  (Top)
+  m_Name: Wall  (Top)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2443,7 +2443,7 @@ GameObject:
   - component: {fileID: 1034143514}
   - component: {fileID: 1034143515}
   m_Layer: 0
-  m_Name: BulletDespawner (Left)
+  m_Name: Wall  (Left)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3095,7 +3095,7 @@ GameObject:
   - component: {fileID: 1170080459}
   - component: {fileID: 1170080460}
   m_Layer: 0
-  m_Name: BulletDespawners (Bottom)
+  m_Name: Wall (Bottom)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3347,12 +3347,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1550086967}
   m_Layer: 0
-  m_Name: Bullet Despawners
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1550086967
 Transform:
   m_ObjectHideFlags: 0
@@ -3666,12 +3666,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f4193bf44ec2f47bab186dbeacfa28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameArea: {fileID: 208512487}
   matchSetupData: {fileID: 11400000, guid: 4c359d63dd24706459836966c6c42416, type: 2}
   playerPrefab: {fileID: 5216372665918371051, guid: d02e5671f87392a4ca4fc11d7ca7369c,
     type: 3}
   ui: {fileID: 1116125347}
-  aiPrefab: {fileID: 8215678606995331196, guid: 59c004639d24e224d84407ee76e13cb3,
-    type: 3}
   bulletPools: {fileID: 1574068196}
 --- !u!4 &1736907423
 Transform:
@@ -3767,7 +3766,7 @@ GameObject:
   - component: {fileID: 1966473544}
   - component: {fileID: 1966473545}
   m_Layer: 0
-  m_Name: BulletDespawners (Right)
+  m_Name: Wall (Right)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

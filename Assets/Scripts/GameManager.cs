@@ -17,16 +17,15 @@ public class GameManager : MonoBehaviour
     public ShipSpawnPoint[] ShipSpawnPoints { get; private set; }
 
     [Header("Set in Inspector")]
+    public GameArea GameArea;
     public MatchSetupData matchSetupData;
     public GameObject playerPrefab;
     public UIController ui;
-    public GameObject aiPrefab;
     public GameObject bulletPools;
 
     //Not used yet:
     public Action onGameStart;
     public Action onGameEnd;
-
     Player playerInstance;
 
     void Awake()

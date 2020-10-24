@@ -14,7 +14,7 @@ public class AIState_Patrol : AIState
 
     public override void Enter()
     {
-        Debug.Log("Patrolling.");
+        //Debug.Log("Patrolling.");
         SetPatrolTarget();
         base.Enter();
     }
@@ -36,8 +36,6 @@ public class AIState_Patrol : AIState
         }
         else
         {
-            //Vector3 direction = Vector3.Normalize(patrolTarget - ship.transform.position);
-            //ship.Move(direction.x, direction.y);
             ship.MoveTowards(patrolTarget);
         }
     }
@@ -49,8 +47,9 @@ public class AIState_Patrol : AIState
 
     void SetPatrolTarget()
     {
-        Debug.Log("Finding a new patrol target.");
-        patrolTarget = new Vector2(Random.Range(-30, 30), Random.Range(-30, 30));
+        Vector3 minPoint = GameManager.Instance.GameArea.Bounds.min;
+        Vector3 maxPoint = GameManager.Instance.GameArea.Bounds.max;
+        patrolTarget = new Vector2(Random.Range(minPoint.x, maxPoint.x), Random.Range(minPoint.y, maxPoint.y));
     }
 
     bool ArrivedAtPatrolTarget()
