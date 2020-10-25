@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Ship))]
-public class AI : MonoBehaviour
+public class AI : ShipController
 {
-    Ship ship;
     public float detectionRadius = 12.0f;
     public float shootingRadius = 8.0f;
     public float avoidRadius = 4.0f;
@@ -13,12 +12,18 @@ public class AI : MonoBehaviour
     public List<Ship> detectedEnemies;
     [SerializeField]
     AIState currentState;
-    void Start()
+
+    override protected void Awake()
     {
-        ship = GetComponent<Ship>();
+        base.Awake();
         detectedAllies = new List<Ship>();
         detectedEnemies = new List<Ship>();
         currentState = new AIState_Idle(ship, this);
+        if (!photonView.IsMine)
+            this.enabled = false;
+    }
+    void Start()
+    {
     }
 
     void Update()

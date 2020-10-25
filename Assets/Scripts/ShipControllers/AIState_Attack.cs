@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class AIState_Attack : AIState
 {
     Ship target;
@@ -35,7 +35,7 @@ public class AIState_Attack : AIState
         ship.Aim(target.transform.position);
         if (Time.time - lastFired > firingInterval)
         {
-            ship.Fire();
+            ship.photonView.RPC("Fire", RpcTarget.All);
             lastFired = Time.time;
         }
 

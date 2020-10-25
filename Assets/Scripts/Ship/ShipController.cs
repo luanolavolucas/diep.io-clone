@@ -1,20 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 [RequireComponent(typeof(Ship))]
-public class ShipController : MonoBehaviour
+public class ShipController : MonoBehaviourPunCallbacks
 {
     public Ship ship;
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void Awake()
     {
-        ship = GetComponentInChildren<Ship>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ship = GetComponent<Ship>();
     }
 }

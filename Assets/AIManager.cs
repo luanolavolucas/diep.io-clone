@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AIManager : MonoBehaviour
+using Photon.Pun;
+public class AIManager : MonoBehaviourPunCallbacks
 {
     [Header("Set in Inspector")]
     public GameObject aiPrefab;
@@ -26,24 +26,30 @@ public class AIManager : MonoBehaviour
 
     void Update()
     {
-        aiSpawnTimer += Time.deltaTime;
-        if (aiSpawnTimer > matchSetupData.timeBetweenAISpawns
-            && ais.Count < matchSetupData.maxShips)
-        {
-            int randomSpawnPoint = UnityEngine.Random.Range(0, shipSpawnPoints.Length);
-            SpawnAI(shipSpawnPoints[randomSpawnPoint]);
-        }
+            aiSpawnTimer += Time.deltaTime;
+            if (aiSpawnTimer > matchSetupData.timeBetweenAISpawns
+                && ais.Count < matchSetupData.maxShips)
+            {
+                int randomSpawnPoint = UnityEngine.Random.Range(0, shipSpawnPoints.Length);
+                SpawnAI(shipSpawnPoints[randomSpawnPoint]);
+            }
+
     }
 
     void SpawnAI(ShipSpawnPoint ssp)
     {
         if (ssp.playerSpawnPoint)
             return;
-        GameObject ai = Instantiate(aiPrefab, ssp.transform.position, Quaternion.identity);
-        Ship s = ai.GetComponent<Ship>();
-        s.onShipKill += RemoveShip;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameObject ai = PhotonNetwork.InstantiateRoomObject(aiPrefab.name, ssp.transform.position, Quaternion.identity);
+            Ship s = ai.GetComponent<Ship>();
+            s.onShipKill += RemoveShip;
+            ais.Add(s);
+        }
+
         aiSpawnTimer = 0;
-        ais.Add(s);
     }
 
     void RemoveShip(Ship s)

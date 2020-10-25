@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IDamageable
 {
     float Health { get;}
-    void Damage(float dmg, IScoreCollector responsible = null);
+    void Damage(float dmg, GameObject responsible = null);
 }

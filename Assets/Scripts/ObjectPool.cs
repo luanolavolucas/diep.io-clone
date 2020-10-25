@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public class ObjectPool:MonoBehaviour
+using Photon.Pun;
+public class ObjectPool:MonoBehaviourPun
 {
     private GameObject prefab;
     private List<GameObject> pool;
@@ -21,10 +22,12 @@ public class ObjectPool:MonoBehaviour
         {
             NewPooledObject();
         }
-    }
 
+        Debug.LogFormat("INITING POOL OF OBJECT {0}", gameObject.name);
+    }
     private GameObject NewPooledObject()
     {
+
         GameObject instance = GameObject.Instantiate(prefab, transform.position, Quaternion.identity);
         instance.transform.parent = transform;
         pool.Add(instance);
@@ -32,9 +35,9 @@ public class ObjectPool:MonoBehaviour
         return instance;
     }
 
-    internal void SetDestructionFlag(bool v)
+    internal void SetDestructionFlag(bool flag)
     {
-        canBeDestroyed = true;
+        canBeDestroyed = flag;
     }
 
     private void Update()

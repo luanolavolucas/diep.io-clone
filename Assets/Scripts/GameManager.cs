@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     static GameManager instance;
     public static GameManager Instance {
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
     //Not used yet:
     public Action onGameStart;
     public Action onGameEnd;
-    Player playerInstance;
+    PlayerController playerInstance;
 
     void Awake()
     {
@@ -44,6 +46,47 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartGame();
+    }
+    void StartGame()
+    {
+        SpawnPlayer();
+        AttachCameraToPlayer();
+        // onGameStart.Invoke();
+    }
+    void SpawnPlayer()
+    {
+        if (playerPrefab == null)
+        {
+            Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
+        }
+
+        else
+        {
+            foreach (ShipSpawnPoint ssp in ShipSpawnPoints)
+            {
+                if (ssp.CanSpawn && ssp.playerSpawnPoint)
+                {
+                    playerInstance = PhotonNetwork.Instantiate(this.playerPrefab.name, Vector3.zero, Quaternion.identity, 0).GetComponent<PlayerController>();
+                    playerInstance.transform.position = ssp.transform.position;
+                    playerInstance.ship.onShipKill += GameOver;
+                }
+            }
+            // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+
+        }
+    }
+
+    void AttachCameraToPlayer()
+    {
+        CinemachineVirtualCamera vc = FindObjectOfType<CinemachineVirtualCamera>();
+        if (vc == null)
+        {
+            Debug.LogError("Cinemachine Virtual Camera not found in the scene.");
+        }
+        else
+        {
+            vc.Follow = playerInstance.transform;
+        }
     }
 
     void Update()
@@ -66,50 +109,26 @@ public class GameManager : MonoBehaviour
         ui.SetDisplays(health, score, weaponName, ammo);
     }
 
-    void StartGame()
-    {
-        SpawnPlayer();
-        AttachCameraToPlayer();
-       // onGameStart.Invoke();
-    }
 
-    void AttachCameraToPlayer()
-    {
-        CinemachineVirtualCamera vc = FindObjectOfType<CinemachineVirtualCamera>();
-        if(vc == null)
-        {
-            Debug.LogError("Cinemachine Virtual Camera not found in the scene.");
-        }
-        else
-        {
-            vc.Follow = playerInstance.transform;
-        }
-    }
 
-    void SpawnPlayer()
-    {
-        Player p = FindObjectOfType<Player>();
 
-        if (p != null)
-        {
-            playerInstance = p;
-            return;
-        }
 
-        foreach (ShipSpawnPoint ssp in ShipSpawnPoints)
-        {
-            if (ssp.CanSpawn && ssp.playerSpawnPoint)
-            {
-                playerInstance = Instantiate(playerPrefab).GetComponent<Player>();
-                playerInstance.transform.position = ssp.transform.position;
-            }
-        }
-        playerInstance.ship.onShipKill += GameOver;
-    }
+
 
     void GameOver(Ship s)
     {
         ui.ShowGameOver(s.Score.ToString());
+        LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        //SceneManager.LoadScene(0);
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
     }
 
     public void ResetScene()

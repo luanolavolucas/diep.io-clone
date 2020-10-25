@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.Damage(bulletData.damage, weapon.Owner);
+            damageable.Damage(bulletData.damage, weapon.Owner?.gameObject);
             gameObject.SetActive(false);
         }
     }

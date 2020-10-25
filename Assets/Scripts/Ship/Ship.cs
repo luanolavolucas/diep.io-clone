@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using DG.Tweening;
-
+using Photon.Pun;
 [RequireComponent(typeof(Rigidbody2D))]
-public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable, IScoreCollector
+public class Ship : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippable, IScoreCollector
 {
     [SerializeField]
     float health;
@@ -55,18 +55,30 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable, IScoreCollect
         brake = DOTween.To(() => rb.velocity, x => rb.velocity = x, new Vector2(0, 0), time);
     }
 
-    public void Damage(float dmg, IScoreCollector responsible = null)
+    public void Damage(float dmg, GameObject responsible = null)
+    {
+        PhotonView pv = responsible?.GetComponent<PhotonView>();
+        //if a photon view caused the damage, send it's id (used to calculate the score), else send -1
+            this.photonView.RPC("Dmg", RpcTarget.All, dmg, pv?pv.ViewID:-1);
+       
+    }
+
+    [PunRPC]
+    private void Dmg(float dmg, int viewId = -1)
     {
         Health -= dmg;
-
         if (Health <= 0)
         {
-            if (responsible != null)
-                responsible.AddToScore(shipData.scoreAwardedWhenDestroyed);
+            if(viewId != -1)
+            {
+                Debug.LogFormat("Photon View with the id {0} destroyed an object", viewId);
+                PhotonView.Find(viewId).GetComponent<IScoreCollector>().AddToScore(shipData.scoreAwardedWhenDestroyed);
+            }
+                    
             brake.Kill();
             onShipKill?.Invoke(this);
-
-            Destroy(this.gameObject);
+            if(photonView.IsMine)
+                PhotonNetwork.Destroy(this.gameObject);
         }
     }
 
@@ -76,11 +88,12 @@ public class Ship : MonoBehaviour, IDamageable, IWeaponEquippable, IScoreCollect
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
     }
-
+    [PunRPC]
     public void Fire()
     {
         WeaponSlot.Weapon.Fire();
     }
+
     public void AddToScore(float value)
     {
         Score += value;

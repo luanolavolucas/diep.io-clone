@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-
-public class PowerUpManager : MonoBehaviour
+using Photon.Pun;
+public class PowerUpManager : MonoBehaviourPun
 {
     [Header("Set in Inspector")]
     public GameObject cratePrefab;
@@ -39,14 +39,18 @@ public class PowerUpManager : MonoBehaviour
 
     void SpawnCrate(CrateSpawnPoint csp)
     {
-        int randomPowerUp = Random.Range(0, powerUpPrefabs.Length);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            int randomPowerUp = Random.Range(0, powerUpPrefabs.Length);
 
-        GameObject crateGO = Instantiate(cratePrefab, csp.transform.position, Quaternion.identity);
-        Crate c = crateGO.GetComponent<Crate>();
-        c.powerUpPrefab = powerUpPrefabs[randomPowerUp];
-        c.onCrateKill += RemoveCrate;
+            GameObject crateGO = Instantiate(cratePrefab, csp.transform.position, Quaternion.identity);
+            Crate c = crateGO.GetComponent<Crate>();
+            c.powerUpPrefab = powerUpPrefabs[randomPowerUp];
+            c.onCrateKill += RemoveCrate;
+            crates.Add(c);
+        }
+
         crateSpawnTimer = 0;
-        crates.Add(c);
     }
 
     void RemoveCrate(Crate c)

@@ -14,13 +14,16 @@ public class Crate : MonoBehaviour, IDamageable
         Health = crateData.health;
     }
 
-    public void Damage(float dmg, IScoreCollector responsible = null)
+    public void Damage(float dmg, GameObject responsible = null)
     {
         Health-= dmg;
-        if(Health <= 0)
+        if (Health <= 0)
         {
             if (responsible != null)
-                responsible.AddToScore(crateData.scoreAwardedWhenDestroyed);
+            {
+                IScoreCollector sc = GetComponent<IScoreCollector>();
+                sc.AddToScore(crateData.scoreAwardedWhenDestroyed);
+            }
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
             onCrateKill?.Invoke(this);
             Destroy(this.gameObject);
