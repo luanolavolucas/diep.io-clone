@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
     public ShipSpawnPoint[] ShipSpawnPoints { get; private set; }
+    public PlayerController PlayerInstance { get; private set; }
 
     [Header("Set in Inspector")]
     public GameArea GameArea;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     //Not used yet:
     public Action onGameStart;
     public Action onGameEnd;
-    PlayerController playerInstance;
+    
 
     void Awake()
     {
@@ -42,6 +43,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
         ShipSpawnPoints = FindObjectsOfType<ShipSpawnPoint>();
+    }
+
+    void OnDestroy()
+    {
+        instance = null;   
     }
     void Start()
     {
@@ -66,9 +72,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 if (ssp.CanSpawn && ssp.playerSpawnPoint)
                 {
-                    playerInstance = PhotonNetwork.Instantiate(this.playerPrefab.name, Vector3.zero, Quaternion.identity, 0).GetComponent<PlayerController>();
-                    playerInstance.transform.position = ssp.transform.position;
-                    playerInstance.ship.onShipKill += GameOver;
+                    PlayerInstance = PhotonNetwork.Instantiate(this.playerPrefab.name, Vector3.zero, Quaternion.identity, 0).GetComponent<PlayerController>();
+                    PlayerInstance.transform.position = ssp.transform.position;
+                    PlayerInstance.ship.onShipKill += GameOver;
+                    break;
                 }
             }
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
@@ -85,7 +92,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            vc.Follow = playerInstance.transform;
+            vc.Follow = PlayerInstance.transform;
         }
     }
 
@@ -100,11 +107,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void UpdateUI()
     {
-        string health = playerInstance.ship.Health.ToString();
-        string score = playerInstance.ship.Score.ToString();
-        string weaponName = playerInstance.ship.WeaponSlot.Weapon.weaponData.weaponName;
+        string health = PlayerInstance.ship.Health.ToString();
+        string score = PlayerInstance.ship.Score.ToString();
+        string weaponName = PlayerInstance.ship.WeaponSlot.Weapon.weaponData.weaponName;
         string ammo = 
-        playerInstance.ship.WeaponSlot.Weapon.weaponData.infiniteAmmo? "" : playerInstance.ship.WeaponSlot.Weapon.Ammo.ToString();
+        PlayerInstance.ship.WeaponSlot.Weapon.weaponData.infiniteAmmo? "" : PlayerInstance.ship.WeaponSlot.Weapon.Ammo.ToString();
 
         ui.SetDisplays(health, score, weaponName, ammo);
     }

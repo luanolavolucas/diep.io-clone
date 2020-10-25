@@ -59,12 +59,12 @@ public class Ship : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippable, I
     {
         PhotonView pv = responsible?.GetComponent<PhotonView>();
         //if a photon view caused the damage, send it's id (used to calculate the score), else send -1
-            this.photonView.RPC("Dmg", RpcTarget.All, dmg, pv?pv.ViewID:-1);
+            photonView.RPC("Dmg", RpcTarget.All, dmg, pv?pv.ViewID:-1);
        
     }
 
     [PunRPC]
-    private void Dmg(float dmg, int viewId = -1)
+    void Dmg(float dmg, int viewId = -1)
     {
         Health -= dmg;
         if (Health <= 0)

@@ -21,7 +21,7 @@ public class Crate : MonoBehaviour, IDamageable
         {
             if (responsible != null)
             {
-                IScoreCollector sc = GetComponent<IScoreCollector>();
+                IScoreCollector sc = responsible.GetComponent<IScoreCollector>();
                 sc.AddToScore(crateData.scoreAwardedWhenDestroyed);
             }
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);

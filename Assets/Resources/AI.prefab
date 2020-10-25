@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4829209054854562878}
   - component: {fileID: 4439498699536200467}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: WeaponSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 1871809973790253054}
   - component: {fileID: 3862924785454484916}
   - component: {fileID: -7025021355742087508}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public abstract class Weapon : MonoBehaviour
+using Photon.Pun;
+public abstract class Weapon : MonoBehaviourPun
 {
     [field: SerializeField]
     public int Ammo { get;  set; }
@@ -18,6 +18,12 @@ public abstract class Weapon : MonoBehaviour
     {
         bulletExitPoints = GetComponentsInChildren<BulletExitPoint>();
         Ammo = weaponData.startingAmmo;
+        CreateBulletPool();
+    }
+
+    [PunRPC]
+    void CreateBulletPool()
+    {
         GameObject bulletPoolGO = new GameObject();
         bulletPool = bulletPoolGO.AddComponent<ObjectPool>();
         bulletPool.Init(weaponData.bulletPrefab, 20);
