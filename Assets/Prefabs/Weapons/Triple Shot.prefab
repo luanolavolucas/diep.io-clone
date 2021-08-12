@@ -95,6 +95,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -110,6 +115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -122,16 +132,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
@@ -150,13 +150,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 846309936759479936, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.119
+      objectReference: {fileID: 0}
+    - target: {fileID: 846309936759479936, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.624
       objectReference: {fileID: 0}
     - target: {fileID: 846309936759479936, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.119
+      propertyPath: m_LocalRotation.w
+      value: 0.9659258
       objectReference: {fileID: 0}
     - target: {fileID: 846309936759479936, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
@@ -175,13 +180,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 846309936759479936, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9659258
-      objectReference: {fileID: 0}
-    - target: {fileID: 846309936759479936, guid: 30b81446fee66484aba9674bc017abd0,
-        type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1422854022342868963, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3839897147664074247, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
@@ -195,15 +200,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4368008259021759560, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
-      propertyPath: bulletExitPoints.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4368008259021759560, guid: 30b81446fee66484aba9674bc017abd0,
-        type: 3}
       propertyPath: weaponData
       value: 
       objectReference: {fileID: 11400000, guid: b52c6371e58fa134a831fd568adb2109,
         type: 2}
+    - target: {fileID: 4368008259021759560, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
+      propertyPath: bulletExitPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4368008259021759560, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
       propertyPath: bulletExitPoints.Array.data[1]
@@ -214,6 +219,12 @@ PrefabInstance:
       propertyPath: bulletExitPoints.Array.data[2]
       value: 
       objectReference: {fileID: 5303282969105228522}
+    - target: {fileID: 4368008259021759560, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
+      propertyPath: OnWeaponFire.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 98450c2a442472b4e98c02659904e31d,
+        type: 2}
     - target: {fileID: 7021777520347037484, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
       propertyPath: m_Sprite

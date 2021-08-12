@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 {
                     PlayerInstance = PhotonNetwork.Instantiate(this.playerPrefab.name, Vector3.zero, Quaternion.identity, 0).GetComponent<PlayerController>();
                     PlayerInstance.transform.position = ssp.transform.position;
-                    PlayerInstance.ship.onShipKill += GameOver;
+                    PlayerInstance.ship.OnShipDestroyed.AddListener(GameOver);
                     break;
                 }
             }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14aae3da87dc9cb4f9ce83609e4bdd3e, type: 3}
+  m_Name: shot_triple
+  m_EditorClassIdentifier: 
+  name: Shot Triple
+  clip: {fileID: 8300000, guid: f1d2d6616df9e85429ea22db5e53310e, type: 3}
+  intro: {fileID: 0}
+  volume: 0.2
+  loop: 0
+  oneShot: 0
+  dontRetrigger: 0
+  ignoreListenerPause: 0
+  pitch: 1
+  spatialBlend: 1
+  AttenuationMinDistance: 18
+  AttenuationMaxDistance: 32
+  playerIsListener: 0
+  alternateClips: []
+  pitchRandomization: 0
+  priority: 128
+  group: {fileID: 0}

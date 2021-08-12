@@ -1,0 +1,17 @@
+{
+    "name": "Luan.AudioTools",
+    "rootNamespace": "Luan.AudioTools",
+    "references": [
+        "GUID:2001a717ae7bd9842ab30c2ddd455844",
+        "GUID:776d03a35f1b52c4a9aed9f56d7b4229"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

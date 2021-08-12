@@ -5,6 +5,8 @@ using UnityEditor;
 using UnityEngine;
 using DG.Tweening;
 using Photon.Pun;
+using UnityEngine.Events;
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class Ship : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippable, IScoreCollector
 {
@@ -24,7 +26,7 @@ public class Ship : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippable, I
     public ShipData shipData;
     public Team team;
 
-    public Action<Ship> onShipKill;
+    public UnityEvent<Ship> OnShipDamaged, OnShipDestroyed;
 
     Rigidbody2D rb;
     SpriteRenderer sr;
@@ -55,19 +57,20 @@ public class Ship : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippable, I
         brake = DOTween.To(() => rb.velocity, x => rb.velocity = x, new Vector2(0, 0), time);
     }
 
-    public void Damage(float dmg, GameObject responsible = null)
+    public void Damage(float damageValue, GameObject responsible = null)
     {
         PhotonView pv = responsible?.GetComponent<PhotonView>();
         //if a photon view caused the damage, send it's id (used to calculate the score), else send -1
-            photonView.RPC("Dmg", RpcTarget.All, dmg, pv?pv.ViewID:-1);
+            photonView.RPC("Dmg", RpcTarget.All, damageValue, pv?pv.ViewID:-1);
        
     }
 
     [PunRPC]
     void Dmg(float dmg, int viewId = -1)
     {
-        Health -= dmg;
-        if (Health <= 0)
+        Health = Mathf.Max(Health - dmg, 0);
+        OnShipDamaged.Invoke(this);
+        if (Health == 0)
         {
             if(viewId != -1)
             {
@@ -76,7 +79,7 @@ public class Ship : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippable, I
             }
                     
             brake.Kill();
-            onShipKill?.Invoke(this);
+            OnShipDestroyed?.Invoke(this);
             if(photonView.IsMine)
                 PhotonNetwork.Destroy(this.gameObject);
         }

@@ -16,7 +16,7 @@ public class AIState
         ENTER, UPDATE, EXIT
     };
 
-    public State name; 
+    public State name;
     protected Phase phase;
     protected Ship ship;
     protected AI ai;
@@ -52,14 +52,14 @@ public class AIState
         foreach (Collider2D col in cols)
         {
             Ship s = col.gameObject.GetComponent<Ship>();
-            if (s!= null)
+            if (s != null)
             {
-                if(s.team != ship.team)
+                if (s.team != ship.team)
                 {
-                    if(!ai.detectedEnemies.Contains(s))
+                    if (!ai.detectedEnemies.Contains(s))
                     {
                         ai.detectedEnemies.Add(s);
-                        s.onShipKill += RemoveEnemyFromList;
+                        s.OnShipDestroyed.AddListener(RemoveEnemyFromList);
                     }
                 }
                 else
@@ -67,7 +67,7 @@ public class AIState
                     if (!ai.detectedAllies.Contains(s))
                         ai.detectedAllies.Add(s);
                 }
-                
+
             }
         }
     }
@@ -75,6 +75,6 @@ public class AIState
     private void RemoveEnemyFromList(Ship s)
     {
         ai.detectedEnemies.Remove(s);
-        s.onShipKill -= RemoveEnemyFromList;
+        s.OnShipDestroyed.RemoveListener(RemoveEnemyFromList);
     }
 }

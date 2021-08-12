@@ -9,6 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -24,6 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -36,16 +46,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 762521432910419949, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}
@@ -72,6 +72,12 @@ PrefabInstance:
       propertyPath: weaponData
       value: 
       objectReference: {fileID: 11400000, guid: d0c2e8608caa43948abf5a68a5e749c1,
+        type: 2}
+    - target: {fileID: 4368008259021759560, guid: 30b81446fee66484aba9674bc017abd0,
+        type: 3}
+      propertyPath: OnWeaponFire.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 482529371d849a14b99dd08b2842f39e,
         type: 2}
     - target: {fileID: 7021777520347037484, guid: 30b81446fee66484aba9674bc017abd0,
         type: 3}

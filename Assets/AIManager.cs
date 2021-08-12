@@ -45,7 +45,7 @@ public class AIManager : MonoBehaviourPunCallbacks
         {
             GameObject ai = PhotonNetwork.InstantiateRoomObject(aiPrefab.name, ssp.transform.position, Quaternion.identity);
             Ship s = ai.GetComponent<Ship>();
-            s.onShipKill += RemoveShip;
+            s.OnShipDestroyed.AddListener(RemoveShip);
             ais.Add(s);
         }
 
@@ -54,7 +54,7 @@ public class AIManager : MonoBehaviourPunCallbacks
 
     void RemoveShip(Ship s)
     {
-        s.onShipKill -= RemoveShip;
+        s.OnShipDestroyed.AddListener(RemoveShip);
         ais.Remove(s);
     }
 }

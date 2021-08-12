@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
+
 public class Crate : MonoBehaviour, IDamageable
 {
     public float Health { get; protected set; }
 
-    public GameObject powerUpPrefab;
-    public CrateData crateData;
-    public Action<Crate> onCrateKill;
-    void Awake()
+    [SerializeField]
+    private GameObject powerUpPrefab;
+    [SerializeField]
+    private CrateData crateData;
+    [SerializeField]
+    public UnityEvent<Crate> OnCrateDestroyed;
+
+    private void Awake()
     {
         Health = crateData.health;
     }
+
+    public void SetPowerUpPrefab(GameObject prefab)
+    {
+        powerUpPrefab = prefab;
+    }
+
 
     public void Damage(float dmg, GameObject responsible = null)
     {
@@ -25,13 +37,13 @@ public class Crate : MonoBehaviour, IDamageable
                 sc.AddToScore(crateData.scoreAwardedWhenDestroyed);
             }
             Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
-            onCrateKill?.Invoke(this);
+            OnCrateDestroyed?.Invoke(this);
             Destroy(this.gameObject);
         }
     }
-    void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision.gameObject.name);
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>() ;
         if(damageable != null)
         {

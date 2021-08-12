@@ -11,23 +11,23 @@ public class PowerUpManager : MonoBehaviourPun
     public GameObject cratePrefab;
     public GameObject[] powerUpPrefabs;
     [SerializeField]
-    List<Crate> crates;
+    private List<Crate> crates;
     CrateSpawnPoint[] crateSpawnPoints;
     MatchSetupData matchSetupData;
     float crateSpawnTimer = 0;
 
-    void Awake()
+    private void Awake()
     {
         crateSpawnPoints = FindObjectsOfType<CrateSpawnPoint>();
         crates = new List<Crate>();
     }
-    void Start()
+    private void Start()
     {
         matchSetupData = GameManager.Instance.matchSetupData;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         crateSpawnTimer += Time.deltaTime;
 
@@ -39,7 +39,7 @@ public class PowerUpManager : MonoBehaviourPun
         }
     }
 
-    void SpawnCrate(CrateSpawnPoint csp)
+    private void SpawnCrate(CrateSpawnPoint csp)
     {
         if (PhotonNetwork.IsMasterClient)
         {
@@ -50,13 +50,13 @@ public class PowerUpManager : MonoBehaviourPun
         crateSpawnTimer = 0;
     }
     [PunRPC]
-    void SpawnCrateRPC(Vector3 position, int randomPowerUp)
+    private void SpawnCrateRPC(Vector3 position, int randomPowerUp)
     {
         print("Spawning crate.");
         GameObject crateGO = Instantiate(cratePrefab, position, Quaternion.identity);
         Crate c = crateGO.GetComponent<Crate>();
-        c.powerUpPrefab = powerUpPrefabs[randomPowerUp];
-        c.onCrateKill += RemoveCrate;
+        c.SetPowerUpPrefab(powerUpPrefabs[randomPowerUp]);
+        c.OnCrateDestroyed.AddListener(RemoveCrate);
         crates.Add(c);
     }
 
@@ -64,7 +64,7 @@ public class PowerUpManager : MonoBehaviourPun
 
     void RemoveCrate(Crate c)
     {
-        c.onCrateKill -= RemoveCrate;
+        c.OnCrateDestroyed.RemoveListener(RemoveCrate);
         crates.Remove(c);
     }
 }

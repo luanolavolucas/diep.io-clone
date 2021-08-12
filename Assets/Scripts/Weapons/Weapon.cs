@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.Events;
+
 public abstract class Weapon : MonoBehaviourPun
 {
     [field: SerializeField]
     public int Ammo { get;  set; }
     public Ship Owner { get; set; }
+
+    public UnityEvent OnWeaponFire;
 
     [Header("Set in Inspector")]
     public WeaponData weaponData;
@@ -48,7 +52,8 @@ public abstract class Weapon : MonoBehaviourPun
             GameObject bullet = bulletPool.Instantiate(bep.transform.position, bep.transform.rotation);
             
             bullet.GetComponent<Bullet>().weapon = this;
-            Ammo -= weaponData.ammoSpentPerShot;
+            Ammo -= weaponData.ammoSpentPerShot; 
         }
+         OnWeaponFire.Invoke();
     }
 }
