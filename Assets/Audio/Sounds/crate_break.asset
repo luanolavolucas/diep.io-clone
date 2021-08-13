@@ -12,20 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14aae3da87dc9cb4f9ce83609e4bdd3e, type: 3}
   m_Name: crate_break
   m_EditorClassIdentifier: 
-  name: Crate Break
   clip: {fileID: 8300000, guid: 67cf30142d3aa09489c2cceb48932324, type: 3}
-  intro: {fileID: 0}
   volume: 0.2
+  pitch: {x: 1, y: 1}
   loop: 0
   oneShot: 0
-  dontRetrigger: 0
   ignoreListenerPause: 0
-  pitch: 1
   spatialBlend: 1
   AttenuationMinDistance: 18
   AttenuationMaxDistance: 32
-  playerIsListener: 0
   alternateClips: []
-  pitchRandomization: 0
+  description: 
   priority: 128
   group: {fileID: 0}

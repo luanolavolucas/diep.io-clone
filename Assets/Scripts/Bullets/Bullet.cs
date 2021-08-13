@@ -38,11 +38,14 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        // print("Bullet entered.");
         IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
         if (damageable != null)
         {
+            // print("Found IDamageable.");
             if (weapon.Owner)
             {
+               //  print("Trying to damage.");
                 damageable.Damage(bulletData.damage, weapon.Owner.gameObject);
             }
             

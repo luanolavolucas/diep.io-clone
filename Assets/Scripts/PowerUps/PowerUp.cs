@@ -5,11 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public abstract class PowerUp : MonoBehaviour
 {
-    protected abstract void ApplyPowerUp(Ship s);
+    protected abstract void ApplyPowerUp(Character s);
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Ship s = collision.GetComponent<Ship>();
+        Character s = collision.GetComponent<Character>();
         if(s != null)
         {
             ApplyPowerUp(s);

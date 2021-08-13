@@ -8,7 +8,7 @@ public abstract class Weapon : MonoBehaviourPun
 {
     [field: SerializeField]
     public int Ammo { get;  set; }
-    public Ship Owner { get; set; }
+    public Character Owner { get; set; }
 
     public UnityEvent OnWeaponFire;
 
@@ -43,7 +43,7 @@ public abstract class Weapon : MonoBehaviourPun
     {        
         foreach(BulletExitPoint bep in bulletExitPoints)
         {
-            if (Ammo<=0)
+            if (Ammo <= 0)
             {
                 //TODO: Find a better place for this logic, probably inside Ship instead.
                 Owner.WeaponSlot.EquipWeapon(Owner.WeaponSlot.defaultWeapon);
@@ -54,6 +54,7 @@ public abstract class Weapon : MonoBehaviourPun
             bullet.GetComponent<Bullet>().weapon = this;
             Ammo -= weaponData.ammoSpentPerShot; 
         }
-         OnWeaponFire.Invoke();
+        print("On Weapon Fire.");
+        OnWeaponFire.Invoke();
     }
 }

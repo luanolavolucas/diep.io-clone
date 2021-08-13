@@ -23,7 +23,7 @@ public class ObjectPool:MonoBehaviourPun
             NewPooledObject();
         }
 
-        Debug.LogFormat("INITING POOL OF OBJECT {0}", gameObject.name);
+        //Debug.LogFormat("INITING POOL OF OBJECT {0}", gameObject.name);
     }
     private GameObject NewPooledObject()
     {

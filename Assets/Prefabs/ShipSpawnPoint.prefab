@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6155432930198305579}
-  - component: {fileID: 422491352925474667}
+  - component: {fileID: 4640223889575532911}
   m_Layer: 0
   m_Name: ShipSpawnPoint
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &422491352925474667
+--- !u!114 &4640223889575532911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,6 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7907891421969112225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7ab70bceefe4844828f946d975eefe, type: 3}
+  m_Script: {fileID: 11500000, guid: 6918056a9f7be374399c14a45c620336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpawnPoint: 0

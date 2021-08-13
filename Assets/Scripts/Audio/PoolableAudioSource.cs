@@ -23,6 +23,8 @@ public class PoolableAudioSource : MonoBehaviour, IPoolable
 
     public void Play(Transform transform)
     {
+        print(transform);
+        print(audioSource.clip);
         this.transform.position = transform.position;
         audioSource.Play();
         Invoke(nameof(CheckForCompletion), (audioSource.clip.length / audioSource.pitch) + 0.25f);

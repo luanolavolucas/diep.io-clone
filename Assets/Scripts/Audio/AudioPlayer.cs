@@ -21,6 +21,7 @@ public class AudioPlayer : MonoBehaviour
 
     public void Play(Sound sound)
     {
+        print("Inside play.");
         PlayInternal(sound);
     }
 
@@ -36,11 +37,9 @@ public class AudioPlayer : MonoBehaviour
             int rand = UnityEngine.Random.Range(-1, sound.alternateClips.Length);
             mainSource.audioSource.clip = rand == -1 ? sound.clip : sound.alternateClips[rand];
         }
-        
-        else
-        {
-            mainSource.Play(transform);
-        }
+        print("Trying to play Audio Source!");
+        mainSource.Play(transform);
+
         return mainSource.audioSource;
 
     }

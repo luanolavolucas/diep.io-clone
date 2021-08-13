@@ -6,7 +6,7 @@ public class WeaponSlot : MonoBehaviour
 {
     public Weapon Weapon { get; private set; }
 
-    public Ship owner;
+    public Character owner;
     public GameObject defaultWeapon;
 
     void Awake()

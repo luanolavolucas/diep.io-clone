@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2063d224c8867245acbb02b0efdeb29, type: 3}
   m_Name: Big Cannon
   m_EditorClassIdentifier: 
-  speed: 5
-  damage: 10
+  speed: 6
+  damage: 8

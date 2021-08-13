@@ -11,7 +11,7 @@ public class WeaponPowerup : PowerUp
     {
         weapon = weaponPrefab.GetComponent<Weapon>();
     }
-    protected override void ApplyPowerUp(Ship s)
+    protected override void ApplyPowerUp(Character s)
     {
         if (weapon.weaponData == s.WeaponSlot.Weapon.weaponData)
         {
