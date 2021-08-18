@@ -1,0 +1,10 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "New Crate Data", menuName = "Game Design/Crate Data", order = 1)]
+public class CrateData : ScriptableObject
+{
+    public float health;
+    public int scoreAwardedWhenDestroyed = 10;
+}
