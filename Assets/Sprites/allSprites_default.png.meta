@@ -23,6 +23,18 @@ TextureImporter:
   - first:
       213: 5863685653654341585
     second: explosion_orange_5
+  - first:
+      213: -5736168334302416957
+    second: grass1
+  - first:
+      213: 4472560165707039920
+    second: grass2
+  - first:
+      213: -5753739675513670241
+    second: crate
+  - first:
+      213: 4434259917222008139
+    second: debris
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -120,7 +132,7 @@ TextureImporter:
         width: 63
         height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -141,7 +153,7 @@ TextureImporter:
         width: 64
         height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,7 +174,7 @@ TextureImporter:
         width: 60
         height: 60
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,7 +195,7 @@ TextureImporter:
         width: 60
         height: 60
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,7 +216,7 @@ TextureImporter:
         width: 57
         height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -225,7 +237,7 @@ TextureImporter:
         width: 46
         height: 45
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -246,7 +258,7 @@ TextureImporter:
         width: 53
         height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -254,6 +266,90 @@ TextureImporter:
       bones: []
       spriteID: 1d70f9ce80fff5150800000000000000
       internalID: 5863685653654341585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 181
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cf6f0e9a490560b0800000000000000
+      internalID: -5736168334302416957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grass2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 117
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b4c78926c9b11e30800000000000000
+      internalID: 4472560165707039920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crate
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 316
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f95bfeeef3c9620b0800000000000000
+      internalID: -5753739675513670241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: debris
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 413
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4555c7a6e7a98d30800000000000000
+      internalID: 4434259917222008139
       vertices: []
       indices: 
       edges: []

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using ToolBox.Pools;
+using Luan.AudioTools;
 
 public class AudioPlayer : MonoBehaviour
 {
@@ -21,7 +22,6 @@ public class AudioPlayer : MonoBehaviour
 
     public void Play(Sound sound)
     {
-        print("Inside play.");
         PlayInternal(sound);
     }
 

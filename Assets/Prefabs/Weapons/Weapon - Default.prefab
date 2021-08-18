@@ -175,7 +175,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 44ba389e4445715449a42326bc36a1ee,
             type: 2}
-          m_ObjectArgumentAssemblyTypeName: Sound, Luan.AudioTools
+          m_ObjectArgumentAssemblyTypeName: Luan.AudioTools.Sound, Luan.AudioTools
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

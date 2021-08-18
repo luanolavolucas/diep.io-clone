@@ -25,18 +25,18 @@ public class AIState_Patrol : AIState
 
         if(ai.detectedEnemies.Count > 0)
         {
-            nextState = new AIState_Chase(ship, ai);
+            nextState = new AIState_Chase(character, ai);
             phase = Phase.EXIT;
         }
 
         if (ArrivedAtPatrolTarget())
         {
-                nextState = new AIState_Idle(ship, ai);
+                nextState = new AIState_Idle(character, ai);
                 phase = Phase.EXIT;
         }
         else
         {
-            ship.MoveTowards(patrolTarget);
+            character.MoveTowards(patrolTarget);
         }
     }
 
@@ -54,7 +54,7 @@ public class AIState_Patrol : AIState
 
     bool ArrivedAtPatrolTarget()
     {
-        return Vector3.Magnitude(ship.transform.position - patrolTarget) < 3.0f;
+        return Vector3.Magnitude(character.transform.position - patrolTarget) < 3.0f;
     }
 
 

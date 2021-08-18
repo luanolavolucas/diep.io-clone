@@ -18,13 +18,13 @@ public class AIState
 
     public State name;
     protected Phase phase;
-    protected Character ship;
+    protected Character character;
     protected AI ai;
     protected AIState nextState;
 
     public AIState(Character ship, AI ai)
     {
-        this.ship = ship;
+        this.character = ship;
         this.ai = ai;
         phase = Phase.ENTER;
     }
@@ -48,13 +48,13 @@ public class AIState
     protected void DetectShips()
     {
         //TODO: Optmize this check
-        Collider2D[] cols = Physics2D.OverlapCircleAll(ship.transform.position, ai.detectionRadius, LayerMask.GetMask("Ships"));
+        Collider2D[] cols = Physics2D.OverlapCircleAll(character.transform.position, ai.detectionRadius, LayerMask.GetMask("Ships"));
         foreach (Collider2D col in cols)
         {
             Character c = col.gameObject.GetComponent<Character>();
             if (c != null)
             {
-                if (c.team != ship.team)
+                if (c.Team != character.Team)
                 {
                     if (!ai.detectedEnemies.Contains(c))
                     {

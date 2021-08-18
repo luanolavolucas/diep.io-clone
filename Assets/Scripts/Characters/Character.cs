@@ -6,12 +6,18 @@ using UnityEngine;
 using DG.Tweening;
 using Photon.Pun;
 using UnityEngine.Events;
+using NaughtyAttributes;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class Character : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippable, IScoreCollector
 {
     [SerializeField]
-    float health;
+    private float health;
+
+    private Animator animator;
+
+
     public float Health
     {
         get { return health; }
@@ -25,22 +31,26 @@ public class Character : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippab
 
     public WeaponSlot WeaponSlot { get; set; }
 
-    public CharacterData characterData;
-    public Team team;
+    [SerializeField]
+    private CharacterData characterData;
 
-    public UnityEvent<Character> OnCharacterDamaged, OnCharacterDestroyed, OnCharacterMoved;
+    [field: SerializeField]
+    public Team Team { get; protected set; }
 
-    Rigidbody2D rb;
-    SpriteRenderer sr;
-    Tween brake;
+    public UnityEvent<Character> OnCharacterDamaged, OnCharacterDestroyed;
+
+    private Rigidbody2D rigidBody;
+    private SpriteRenderer spriteRenderer;
+    private Tween brake;
 
     void Awake()
     {
         Health = characterData.health;
         WeaponSlot = GetComponentInChildren<WeaponSlot>();
-        rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
-        sr.color = team.teamColor;
+        rigidBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        spriteRenderer.color = Team.teamColor;
     }
 
     public void MoveTowards(Vector3 target)
@@ -51,13 +61,23 @@ public class Character : MonoBehaviourPunCallbacks, IDamageable, IWeaponEquippab
 
     public void Move(float directionX, float directionY)
     {
-        rb.velocity = new Vector2(directionX, directionY) * characterData.speed;
-        OnCharacterMoved.Invoke(this);
+        rigidBody.velocity = new Vector2(directionX, directionY) * characterData.speed;
+        animator.SetBool("isMoving", rigidBody.velocity.x != 0 || rigidBody.velocity.y != 0);
+        UpdateFacing();
+
+    }
+
+    private void UpdateFacing()
+    {
+        if (rigidBody.velocity.x != 0)
+        {
+            spriteRenderer.flipX = rigidBody.velocity.x < 0;
+        }
     }
 
     public void Brake(float time)
     {
-        brake = DOTween.To(() => rb.velocity, x => rb.velocity = x, new Vector2(0, 0), time);
+        brake = DOTween.To(() => rigidBody.velocity, x => rigidBody.velocity = x, new Vector2(0, 0), time);
     }
 
     public void Damage(float damageValue, GameObject responsible = null)

@@ -20,7 +20,7 @@ public class AIState_Idle : AIState
     {
         if (Random.Range(0, 100) < 10)
         {
-            nextState = new AIState_Patrol(ship, ai);
+            nextState = new AIState_Patrol(character, ai);
             phase = Phase.EXIT;
         }
     }

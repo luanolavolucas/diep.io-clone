@@ -5,8 +5,8 @@ using UnityEngine;
 public class AIState_Chase : AIState
 {
     Character target;
-    public AIState_Chase(Character ship, AI ai)
-                : base(ship, ai)
+    public AIState_Chase(Character character, AI ai)
+                : base(character, ai)
     {
         name = State.CHASE;
     }
@@ -20,19 +20,19 @@ public class AIState_Chase : AIState
     {
         if (target == null)
         {
-            nextState = new AIState_Idle(ship, ai);
+            nextState = new AIState_Idle(character, ai);
             phase = Phase.EXIT;
             return;
         }
 
-        ship.Aim(target.transform.position);
-        if(Vector3.Distance(target.transform.position,ship.transform.position) > ai.shootingRadius)
+        character.Aim(target.transform.position);
+        if(Vector3.Distance(target.transform.position,character.transform.position) > ai.shootingRadius)
         {
-            ship.MoveTowards(target.transform.position);
+            character.MoveTowards(target.transform.position);
         }
         else
         {
-            nextState = new AIState_Attack(ship, ai);
+            nextState = new AIState_Attack(character, ai);
             phase = Phase.EXIT;
         }
         

@@ -1,6 +1,7 @@
 using UnityEngine;
 using ToolBox.Pools;
 using System.Collections;
+using Luan.AudioTools;
 
 public class PoolableAudioSource : MonoBehaviour, IPoolable
 {
@@ -18,7 +19,7 @@ public class PoolableAudioSource : MonoBehaviour, IPoolable
     {
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
-        gameObject.hideFlags = HideFlags.HideInHierarchy;
+        //gameObject.hideFlags = HideFlags.HideInHierarchy;
     }
 
     public void Play(Transform transform)
@@ -64,7 +65,6 @@ public class PoolableAudioSource : MonoBehaviour, IPoolable
         audioSource.clip = sound.clip;
         audioSource.volume = sound.volume;
         audioSource.pitch = Random.Range(sound.pitch.x, sound.pitch.y);
-        audioSource.loop = sound.loop;
         audioSource.spatialBlend = sound.spatialBlend;
         audioSource.minDistance = sound.AttenuationMinDistance;
         audioSource.maxDistance = sound.AttenuationMaxDistance;

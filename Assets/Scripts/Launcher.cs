@@ -83,8 +83,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
     }
 
-    public void Connect()
+    public void Connect(bool offlineMode)
     {
+        PhotonNetwork.OfflineMode = offlineMode;
         progressLabel.SetActive(true);
         controlPanel.SetActive(false);
 

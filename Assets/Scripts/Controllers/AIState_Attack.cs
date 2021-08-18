@@ -17,7 +17,7 @@ public class AIState_Attack : AIState
     {
         target = ai.detectedEnemies[0];
         Debug.Log("Attacking.");
-        ship.Brake(3);
+        character.Brake(3);
         base.Enter();
 
 
@@ -26,22 +26,22 @@ public class AIState_Attack : AIState
     {
         if(target == null)
         {
-            nextState = new AIState_Idle(ship, ai);
+            nextState = new AIState_Idle(character, ai);
             phase = Phase.EXIT;
             return;
         }
 
 
-        ship.Aim(target.transform.position);
+        character.Aim(target.transform.position);
         if (Time.time - lastFired > firingInterval)
         {
-            ship.photonView.RPC("Fire", RpcTarget.All);
+            character.photonView.RPC("Fire", RpcTarget.All);
             lastFired = Time.time;
         }
 
-        if (Vector3.Distance(target.transform.position, ship.transform.position) > ai.detectionRadius)
+        if (Vector3.Distance(target.transform.position, character.transform.position) > ai.detectionRadius)
         {
-            nextState = new AIState_Chase(ship, ai);
+            nextState = new AIState_Chase(character, ai);
             phase = Phase.EXIT;
         }
     }
