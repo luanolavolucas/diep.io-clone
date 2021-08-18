@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: crate_break
   m_EditorClassIdentifier: 
   description: 
-  volume: 0.2
+  volume: 0.32
   pitch: {x: 1, y: 1}
   priority: 128
   group: {fileID: 2944194727332818583, guid: 1070671d296be1f4c954c77e24b46ec8, type: 2}

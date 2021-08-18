@@ -19,7 +19,7 @@ public class PoolableAudioSource : MonoBehaviour, IPoolable
     {
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
-        //gameObject.hideFlags = HideFlags.HideInHierarchy;
+        gameObject.hideFlags = HideFlags.HideInHierarchy;
     }
 
     public void Play(Transform transform)
